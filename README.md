@@ -1,45 +1,85 @@
-# EJBCA PKI Management System
+# EJBCA CLM Agent - AI-Powered Certificate Lifecycle Management
 
-This project provides a containerized EJBCA (Enterprise Java Bean Certificate Authority) setup with MCP (Model Context Protocol) server integration for automated certificate management operations.
+⚠️ **PROJECT STATUS: UNDER ACTIVE DEVELOPMENT - FEATURES AND DOCUMENTATION ARE BEING UPDATED**
+
+This project builds an **intelligent CLM (Certificate Lifecycle Management) Agent** powered by Claude AI Desktop integration. The agent automates certificate operations through EJBCA PKI infrastructure using the Model Context Protocol (MCP), enabling natural language interactions for complex certificate management tasks.
 
 ## Project Overview
 
-EJBCA is an open-source Public Key Infrastructure (PKI) Certificate Authority software that provides a robust platform for managing digital certificates. This setup includes:
+This CLM Agent transforms traditional certificate management by providing:
 
-- **Containerized EJBCA CE (Community Edition)** using Keyfactor's official Docker image
-- **MCP Server Integration** for automated certificate operations via API
-- **Automated Setup Scripts** for quick deployment and credential extraction
-- **REST API Configuration** for programmatic certificate management
-- **Client Certificate Authentication** for secure API access
+- **🤖 AI-Powered Certificate Operations** - Natural language commands for certificate issuance, renewal, and revocation
+- **🔌 Claude AI Desktop Integration** - Direct connection via MCP (Model Context Protocol) for seamless AI interactions  
+- **🏗️ Containerized EJBCA Infrastructure** - Full PKI environment using Keyfactor's EJBCA Community Edition
+- **🚀 Automated CLM Workflows** - Intelligent certificate lifecycle management with minimal human intervention
+- **🔐 Enterprise-Grade Security** - Client certificate authentication and secure API access
+- **📊 Certificate Analytics** - AI-driven insights into certificate health and lifecycle patterns
 
-## Features
+### Why This Agent?
 
-- 🔐 **Certificate Authority Management** - Issue, revoke, and manage digital certificates
-- 🚀 **Automated Deployment** - One-click setup with Docker Compose
-- 🔑 **Credential Extraction** - Automatic SuperAdmin credential capture from logs
-- 🌐 **Web Interface** - Browser-based administration interface
-- 🔌 **REST API** - Programmatic access to certificate operations
-- 🐍 **Python Integration** - MCP server for certificate automation
-- 📜 **Certificate Profiles** - Customizable certificate templates and policies
+Traditional Certificate Lifecycle Management requires:
+- Deep PKI knowledge and manual processes
+- Complex API integrations and scripting
+- Time-consuming certificate provisioning workflows
+- Manual monitoring and renewal processes
 
-## Architecture
+**Our CLM Agent enables:**
+- Natural language certificate requests: *"Issue a SSL certificate for app.example.com valid for 2 years"*
+- Automated renewal workflows: *"Check and renew certificates expiring in 30 days"*
+- Intelligent certificate analytics: *"Show me certificate usage patterns and security risks"*
+- Conversational troubleshooting: *"Why did the certificate validation fail?"*
+
+## CLM Agent Features
+
+### 🤖 AI-Powered Operations
+- **Natural Language Processing** - Interact with certificates using plain English commands
+- **Intelligent Decision Making** - AI-driven certificate policy recommendations
+- **Automated Workflows** - Self-executing certificate lifecycle processes
+- **Contextual Assistance** - Smart troubleshooting and guidance
+
+### 🏗️ Infrastructure & Integration  
+- **Claude AI Desktop Integration** - Direct MCP connection for seamless AI interactions
+- **Containerized EJBCA Setup** - Full PKI environment with one-click deployment
+- **RESTful API Access** - Programmatic certificate operations
+- **Automated Credential Management** - Secure handling of PKI authentication
+
+### 📋 Certificate Management
+- **Automated Issuance** - AI-guided certificate creation and provisioning
+- **Lifecycle Monitoring** - Intelligent tracking of certificate status and expiration
+- **Renewal Automation** - Proactive certificate renewal workflows
+- **Revocation Management** - Secure certificate revocation and CRL updates
+
+## CLM Agent Architecture
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Web Browser   │    │   MCP Server     │    │   Client Apps   │
-│  (Admin UI)     │    │  (Python)        │    │   (API Users)   │
-└─────────┬───────┘    └────────┬─────────┘    └─────────┬───────┘
-          │                     │                        │
-          │ HTTPS/Cert Auth     │ REST API               │ REST API
-          │                     │                        │
-      ┌───▼─────────────────────▼────────────────────────▼───┐
-      │              EJBCA Container                        │
-      │  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐ │
-      │  │  Admin Web  │  │  Public Web  │  │  REST API   │ │
-      │  │Interface    │  │  Interface   │  │  Endpoint   │ │
-      │  └─────────────┘  └──────────────┘  └─────────────┘ │
-      └─────────────────────────────────────────────────────┘
+┌─────────────────────┐    ┌──────────────────────┐
+│   Claude AI Desktop │    │     Human User       │
+│                     │◄──►│  (Natural Language)  │
+└──────────┬──────────┘    └──────────────────────┘
+           │ MCP Protocol
+           │
+┌──────────▼──────────┐    ┌──────────────────────┐
+│   CLM Agent (MCP)   │    │    Web Browser       │
+│  ejbca-mcp-server   │    │   (Admin Interface)  │
+└──────────┬──────────┘    └──────────┬───────────┘
+           │ REST API Calls           │ HTTPS/Cert Auth
+           │                          │
+       ┌───▼──────────────────────────▼────────────────┐
+       │            EJBCA Container                    │
+       │  ┌─────────────┐  ┌──────────────┐          │
+       │  │  Admin Web  │  │  REST API    │          │
+       │  │ Interface   │  │  Endpoint    │          │
+       │  └─────────────┘  └──────────────┘          │
+       │           PKI Certificate Store              │
+       └─────────────────────────────────────────────┘
 ```
+
+### Connection Flow:
+1. **User** communicates with **Claude AI Desktop** in natural language
+2. **Claude AI Desktop** connects to **CLM Agent** via MCP protocol (`mcp.json`)
+3. **CLM Agent** translates AI requests into EJBCA REST API calls
+4. **EJBCA** processes certificate operations and returns results
+5. **Claude AI Desktop** provides intelligent responses and insights
 
 ## Demo Video
 
@@ -173,18 +213,41 @@ curl -k --cert ./certs/client.pem --key ./certs/client.key \
 curl -k https://localhost/ejbca/publicweb/healthcheck/ejbcahealth
 ```
 
-## MCP Server Integration
+## CLM Agent Integration with Claude AI Desktop
 
-The `ejbca-mcp-server.py` provides Model Context Protocol integration for:
-- Automated certificate issuance
-- Certificate revocation operations
-- CA management tasks
-- End entity profile management
+### Setting up MCP Connection
 
-### Running MCP Server
-```bash
-python ejbca-mcp-server.py
+1. **Configure Claude AI Desktop MCP Settings**
+   - Add the `mcp.json` configuration to Claude AI Desktop
+   - This enables direct communication between Claude and the CLM Agent
+
+2. **Start CLM Agent Server**
+   ```bash
+   python ejbca-mcp-server.py
+   ```
+
+3. **Connect Claude AI Desktop**
+   - Claude AI Desktop will automatically connect to the CLM Agent via MCP
+   - You can now use natural language commands for certificate operations
+
+### Example CLM Agent Commands
+
+Once connected to Claude AI Desktop, you can use commands like:
+
 ```
+"Issue a new SSL certificate for example.com with 2-year validity"
+"Show me all certificates expiring in the next 30 days"
+"Revoke the certificate with serial number 123456789"
+"Create a new certificate profile for web servers"
+"Check the health of our certificate authority"
+```
+
+### MCP Configuration (`mcp.json`)
+
+The `mcp.json` file configures the connection between Claude AI Desktop and the CLM Agent:
+- Server endpoint and authentication
+- Available certificate operations
+- Security context and permissions
 
 ## Directory Structure
 
