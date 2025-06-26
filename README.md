@@ -41,6 +41,12 @@ EJBCA is an open-source Public Key Infrastructure (PKI) Certificate Authority so
       └─────────────────────────────────────────────────────┘
 ```
 
+## Demo Video
+
+[![EJBCA Agent Setup Demo](https://img.youtube.com/vi/ACwgBqdAwKI/0.jpg)](https://www.youtube.com/watch?v=ACwgBqdAwKI)
+
+Watch the complete setup and configuration process in action.
+
 ## Quick Start
 
 ### Prerequisites
@@ -86,7 +92,16 @@ After the automated setup completes:
    - Import the `SuperAdmin.p12` file
    - Enter the enrollment password when prompted
 
-4. **Access Admin Interface with Certificate**
+4. **Extract Certificate Files for API Access**
+   ```bash
+   chmod +x cert.sh
+   ./cert.sh
+   ```
+   This will extract the certificate and private key to the `certs/` directory:
+   - `certs/client.pem` - Client certificate
+   - `certs/client.key` - Private key
+
+5. **Access Admin Interface with Certificate**
    - Navigate to `https://localhost/ejbca/adminweb/`
    - Select the SuperAdmin certificate when prompted
    - You should now have full administrative access
