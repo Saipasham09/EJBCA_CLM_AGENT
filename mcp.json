@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "ejbca": {
+      "command": "python",
+      "args": ["ejbca-mcp-server.py"],
+      "cwd": "/Users/saipasham/ejbca",
+      "env": {
+        "VIRTUAL_ENV": "/Users/saipasham/ejbca/venv",
+        "PATH": "/Users/saipasham/ejbca/venv/bin:/usr/local/bin:/usr/bin:/bin",
+        "EJBCA_BASE_URL": "https://localhost:8443",
+        "EJBCA_CLIENT_CERT": "./certs/client.pem",
+        "EJBCA_CLIENT_KEY": "./certs/client.key",
+        "EJBCA_CA_CERT": "./certs/ca.pem",
+        "EJBCA_VERIFY_SSL": "false"
+      }
+    }
+  }
+} 

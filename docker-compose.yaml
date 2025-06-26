@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  ejbca:
+    image: keyfactor/ejbca-ce:latest
+    container_name: ejbca-ce
+    hostname: localhost
+    environment:
+      TLS_SETUP_ENABLED: "true"
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - ejbca_data:/opt/primekey/
+      - ./certs:/opt/ejbca/certs
+    restart: unless-stopped
+    networks:
+      - ejbca-network
+
+volumes:
+  ejbca_data:
+
+networks:
+  ejbca-network:
+    driver: bridge
